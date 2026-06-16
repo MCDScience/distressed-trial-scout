@@ -71,6 +71,10 @@ def _parse_trial_results(raw: str, records: list[TrialRecord]) -> list[TrialResu
                     distress_score=float(
                         item.get("distress_score") or (base.distress_score if base else 0.0)
                     ),
+                    distress_breakdown=dict(
+                        item.get("distress_breakdown")
+                        or (base.distress_breakdown if base else {})
+                    ),
                     biology_summary=item.get("biology_summary")
                     or item.get("biologySummary")
                     or "Per registry: insufficient detail to summarize.",
@@ -90,6 +94,7 @@ def _parse_trial_results(raw: str, records: list[TrialRecord]) -> list[TrialResu
                     phase=record.phase,
                     status=record.status,
                     distress_score=record.distress_score,
+                    distress_breakdown=dict(record.distress_breakdown),
                     biology_summary="Per registry: summary unavailable.",
                     ctgov_url=record.ctgov_url,
                 )

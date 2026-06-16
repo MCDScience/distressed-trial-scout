@@ -10,6 +10,7 @@ class TrialResult(BaseModel):
     phase: str
     status: str
     distress_score: float
+    distress_breakdown: dict[str, float] = Field(default_factory=dict)
     biology_summary: str = Field(
         description="2-3 sentence biology/biomarker summary grounded in registry text"
     )
